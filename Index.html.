@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pense à toi</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+        }
+        #bouton-coeur {
+            font-size: 100px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        #bouton-coeur:active {
+            transform: scale(0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <button id="bouton-coeur">❤️</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
