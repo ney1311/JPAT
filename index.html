@@ -1,76 +1,53 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<button id="auth-button" style="margin-top: 20px; padding: 10px; border-radius: 10px; border: 1px solid white; background: none; color: white;">
-    Activer les notifications
-</button>
-
-<script>
-  document.getElementById('auth-button').addEventListener('click', function() {
-    OneSignalDeferred.push(function(OneSignal) {
-        OneSignal.Notifications.requestPermission();
-    });
-  });
-</script>
-
- <link rel="manifest" href="manifest.json">
-
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "TON_APP_ID_ICI", // Vérifie bien ton ID ici
-      allowLocalhostAsSecureOrigin: true,
-      notifyButton: {
-        enable: true, // Cela va afficher une petite cloche en bas à droite
-        size: 'medium',
-        theme: 'default',
-        position: 'bottom-right',
-        text: {
-            'tip.state.unsubscribed': 'S\'abonner aux notifications',
-            'tip.state.subscribed': 'Vous êtes abonné',
-            'tip.state.blocked': 'Vous avez bloqué les notifications',
-            'message.prenotify': 'Cliquez pour recevoir les pensées',
-            'action.subscribed': 'Merci !',
-            'action.resubscribed': 'Réabonné !',
-            'action.unsubscribed': 'Désabonné'
-        }
-      },
-    });
-  });
-</script>
-
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pense à toi</title>
+    <link rel="manifest" href="manifest.json">
+    
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "TON_APP_ID", // <-- TON APP ID ICI
+          safari_web_id: "TON_SAFARI_ID_SI_BESOIN",
+          notifyButton: { enable: true }
+        });
+      });
+    </script>
+
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: sans-serif;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+            font-family: sans-serif; text-align: center;
         }
         #bouton-coeur {
-            font-size: 100px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s;
+            font-size: 100px; background: white; border: none; border-radius: 50%;
+            width: 180px; height: 180px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            cursor: pointer; transition: transform 0.1s;
         }
-        #bouton-coeur:active {
-            transform: scale(0.8);
-        }
+        #bouton-coeur:active { transform: scale(0.9); }
+        .instructions { color: white; margin-top: 20px; font-size: 1.1em; padding: 0 20px; }
+        #auth-btn { margin-top: 30px; background: rgba(255,255,255,0.2); border: 1px solid white; color: white; padding: 10px 20px; border-radius: 20px; }
     </style>
 </head>
 <body>
 
     <button id="bouton-coeur">❤️</button>
+    <div class="instructions">Appuie pour envoyer une pensée</div>
+    
+    <button id="auth-btn">Activer les Notifications</button>
 
     <script src="script.js"></script>
+    <script>
+        document.getElementById('auth-btn').addEventListener('click', function() {
+            OneSignalDeferred.push(function(OneSignal) {
+                OneSignal.Notifications.requestPermission();
+            });
+        });
+    </script>
 </body>
 </html>
