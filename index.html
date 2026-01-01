@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="manifest" href="manifest.json">
+ <link rel="manifest" href="manifest.json">
 
-   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
-      appId: "5f789a3b-121d-4961-8cea-7ac7f5d59cda",
+      appId: "TON_APP_ID_ICI", // Vérifie bien ton ID ici
+      allowLocalhostAsSecureOrigin: true,
+      notifyButton: {
+        enable: true, // Cela va afficher une petite cloche en bas à droite
+        size: 'medium',
+        theme: 'default',
+        position: 'bottom-right',
+        text: {
+            'tip.state.unsubscribed': 'S\'abonner aux notifications',
+            'tip.state.subscribed': 'Vous êtes abonné',
+            'tip.state.blocked': 'Vous avez bloqué les notifications',
+            'message.prenotify': 'Cliquez pour recevoir les pensées',
+            'action.subscribed': 'Merci !',
+            'action.resubscribed': 'Réabonné !',
+            'action.unsubscribed': 'Désabonné'
+        }
+      },
     });
   });
+</script>
+
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
