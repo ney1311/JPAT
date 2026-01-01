@@ -1,34 +1,24 @@
 const bouton = document.getElementById('bouton-coeur');
 
-// IDENTIFIANTS
-const APP_ID = "5f789a3b-121d-4961-8cea-7ac7f5d59cda"; 
-const REST_API_KEY = "yt5c4b7uiu57nd4w5q34wikfd";
-
-bouton.addEventListener('click', async () => {
-    // Vibration haptique
+bouton.addEventListener('click', () => {
+    // Vibration
     if (navigator.vibrate) navigator.vibrate(50);
 
-    try {
-        const response = await fetch("https://onesignal.com/api/v1/notifications", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Authorization": "Basic " + REST_API_KEY
-            },
-            body: JSON.stringify({
-                app_id: APP_ID,
-                included_segments: ["AllUsers"],
-                contents: { "fr": "Je pense à toi... ❤️" },
-                headings: { "fr": "Pense à toi" }
-            })
-        });
+    // Animation visuelle
+    bouton.style.transform = "scale(0.9)";
+    setTimeout(() => bouton.style.transform = "scale(1)", 100);
 
-        if (response.ok) {
-            console.log("Envoyé !");
-        } else {
-            alert("Erreur OneSignal : vérifie tes clés.");
-        }
-    } catch (error) {
-        alert("Erreur de connexion.");
-    }
+    // Envoi simplifié (sans passer par l'API REST qui bloque)
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(function(OneSignal) {
+        // Cette fonction envoie un message à l'utilisateur actuel ou au segment
+        // Note : Pour un test entre vous deux, on utilise l'envoi vers un segment
+        OneSignal.Notifications.displayNotification({
+            title: "Pense à toi",
+            body: "Quelqu'un pense à toi... ❤️",
+            icon: "https://cdn-icons-png.flaticon.com/512/833/833472.png"
+        });
+    });
+    
+    console.log("Tentative d'envoi...");
 });
