@@ -2,7 +2,7 @@ const bouton = document.getElementById('bouton-coeur');
 
 // --- TES IDENTIFIANTS ONESIGNAL ---
 const APP_ID = "5f789a3b-121d-4961-8cea-7ac7f5d59cda"; 
-const REST_API_KEY = "os_v2_app_l54juoysdvewddhkpld7lvm43j2iyccnm5ju2xerpvqt324dr2dwlk7tbfj4oo4yjotcfu64xkugofrw6riucvlahglxwv4lfagwm3i";
+const REST_API_KEY = "2iyccnm5ju2xerpvqt324dr2d";
 // ----------------------------------
 
 bouton.addEventListener('click', async () => {
