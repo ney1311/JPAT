@@ -1,3 +1,17 @@
+        const response = await fetch("https://onesignal.com/api/v1/notifications", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Authorization": "Basic " + REST_API_KEY
+            },
+            body: JSON.stringify({
+                app_id: APP_ID,
+                included_segments: ["AllUsers"],
+                contents: { "fr": "Je pense à toi... ❤️" },
+                headings: { "fr": "Pense à toi" }
+            })
+        });
+
 const bouton = document.getElementById('bouton-coeur');
 
 // --- TES IDENTIFIANTS ONESIGNAL ---
