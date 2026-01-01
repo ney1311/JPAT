@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<button id="auth-button" style="margin-top: 20px; padding: 10px; border-radius: 10px; border: 1px solid white; background: none; color: white;">
+    Activer les notifications
+</button>
+
+<script>
+  document.getElementById('auth-button').addEventListener('click', function() {
+    OneSignalDeferred.push(function(OneSignal) {
+        OneSignal.Notifications.requestPermission();
+    });
+  });
+</script>
+
  <link rel="manifest" href="manifest.json">
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
