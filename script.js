@@ -1,3 +1,14 @@
+const bouton = document.getElementById('bouton-coeur');
+
+// IDENTIFIANTS
+const APP_ID = "5f789a3b-121d-4961-8cea-7ac7f5d59cda"; 
+const REST_API_KEY = "yt5c4b7uiu57nd4w5q34wikfd";
+
+bouton.addEventListener('click', async () => {
+    // Vibration haptique
+    if (navigator.vibrate) navigator.vibrate(50);
+
+    try {
         const response = await fetch("https://onesignal.com/api/v1/notifications", {
             method: "POST",
             headers: {
@@ -12,44 +23,12 @@
             })
         });
 
-const bouton = document.getElementById('bouton-coeur');
-
-// --- TES IDENTIFIANTS ONESIGNAL ---
-const APP_ID = "5f789a3b-121d-4961-8cea-7ac7f5d59cda"; 
-const REST_API_KEY = "2iyccnm5ju2xerpvqt324dr2d";
-// ----------------------------------
-
-bouton.addEventListener('click', async () => {
-    // Petit effet visuel au clic
-    bouton.style.transform = "scale(0.9)";
-    setTimeout(() => bouton.style.transform = "scale(1)", 100);
-
-    // Envoi de la notification via l'API OneSignal
-    try {
-        const response = await fetch("https://onesignal.com/api/v1/notifications", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Authorization": "Basic " + REST_API_KEY
-            },
-            body: JSON.stringify({
-                app_id: APP_ID,
-                included_segments: ["AllUsers"], // Envoie à tous ceux qui ont l'app
-                contents: { "fr": "Je pense à toi... ❤️" },
-                headings: { "fr": "Pense à toi" }
-            })
-        });
-
         if (response.ok) {
-            console.log("Notification envoyée avec succès !");
+            console.log("Envoyé !");
         } else {
-            const errorData = await response.json();
-            console.error("Erreur OneSignal :", errorData);
-            alert("Erreur OneSignal : " + (errorData.errors ? errorData.errors[0] : "Inconnue"));
+            alert("Erreur OneSignal : vérifie tes clés.");
         }
     } catch (error) {
-        console.error("Erreur réseau :", error);
-        alert("Erreur de connexion internet.");
+        alert("Erreur de connexion.");
     }
 });
-
